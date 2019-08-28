@@ -101,9 +101,9 @@ public class Frmanadeimagen extends javax.swing.JFrame {
                                 .addComponent(jLabel3)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tnombre, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
-                            .addComponent(trom))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(trom, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(brom)
                         .addContainerGap())
@@ -113,7 +113,7 @@ public class Frmanadeimagen extends javax.swing.JFrame {
                         .addGap(147, 147, 147))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(timagen, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -219,7 +219,7 @@ public class Frmanadeimagen extends javax.swing.JFrame {
             try {
                 metodos.copiaimagen(timagen.getText(), metodos.getpathxml() + "/downloaded_images/" + nombreimagen);
                 if (encontradoxml) {
-                    metodos.modificajuego(nombrejuegoeditado, tnombre.getText(), ".\\downloaded_images" + "\\" + nombreimagen);
+                    metodos.modificajuego(nombrejuegoeditado, tnombre.getText(), "./downloaded_images" + "/" + nombreimagen);
                     vaciacampos();
                 } else {
                   //  metodos.anadejuego(nombrejuegoeditado, tnombre.getText(), ".\\downloaded_images" + "\\" + nombreimagen);
