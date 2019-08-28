@@ -48,7 +48,7 @@ public class Frmanadeimagen extends javax.swing.JFrame {
         timagen = new javax.swing.JTextField();
         bimagen = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        banadir = new javax.swing.JButton();
         tnombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         lencontrado = new javax.swing.JLabel();
@@ -77,10 +77,11 @@ public class Frmanadeimagen extends javax.swing.JFrame {
 
         jLabel2.setText("Ruta imagen");
 
-        jButton3.setText("Añadir imagen");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        banadir.setText("Añadir imagen");
+        banadir.setEnabled(false);
+        banadir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                banadirActionPerformed(evt);
             }
         });
 
@@ -108,7 +109,7 @@ public class Frmanadeimagen extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton3)
+                        .addComponent(banadir)
                         .addGap(147, 147, 147))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -143,7 +144,7 @@ public class Frmanadeimagen extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(lencontrado)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(jButton3)
+                .addComponent(banadir)
                 .addContainerGap())
         );
 
@@ -159,7 +160,7 @@ public class Frmanadeimagen extends javax.swing.JFrame {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
 
             //This is where a real application would open the file.
-            trom.setText(fc.getSelectedFile().getAbsolutePath());
+            
             rutarelativa = metodos.obtenrelativa(fc.getSelectedFile().getAbsolutePath());
             if (rutarelativa != null) {
                 System.out.println(rutarelativa);
@@ -170,10 +171,13 @@ public class Frmanadeimagen extends javax.swing.JFrame {
                     tnombre.setText(metodos.quitaextension(fc.getSelectedFile().getName()));
                     lencontrado.setText("Juego no encontrado en el XML");
                     encontradoxml = false;
+                    banadir.setEnabled(false);
                 } else {
+                    trom.setText(fc.getSelectedFile().getAbsolutePath());
                     lencontrado.setText("Juego encontrado en el XML");
                     tnombre.setText(buscajuego.getNombre());
                     encontradoxml = true;
+                    banadir.setEnabled(true);
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "El juego debe estar en una ruta relativa el xml", "Alerta " + "Alerta", JOptionPane.INFORMATION_MESSAGE);
@@ -188,7 +192,7 @@ public class Frmanadeimagen extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         JFileChooser fc = new JFileChooser();
-        FileFilter filter = new FileNameExtensionFilter("Imágenes", "png,jpeg,PNG,JPEG,jpg,JPG");
+        FileFilter filter = new FileNameExtensionFilter("Imágenes", "png","jpeg","PNG","JPEG","jpg","JPG");
         fc.setFileFilter(filter);
         int returnVal = fc.showOpenDialog(Frmanadeimagen.this);
 
@@ -200,7 +204,15 @@ public class Frmanadeimagen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bimagenActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void vaciacampos()
+    {
+        trom.setText("");
+        banadir.setEnabled(false);
+        tnombre.setText("");
+        timagen.setText("");
+    }
+    
+    private void banadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_banadirActionPerformed
         // TODO add your handling code here:
         if (trom.getText().length() > 0 && tnombre.getText().length() > 0 && timagen.getText().length() > 0) {
 
@@ -208,9 +220,9 @@ public class Frmanadeimagen extends javax.swing.JFrame {
                 metodos.copiaimagen(timagen.getText(), metodos.getpathxml() + "/downloaded_images/" + nombreimagen);
                 if (encontradoxml) {
                     metodos.modificajuego(nombrejuegoeditado, tnombre.getText(), ".\\downloaded_images" + "\\" + nombreimagen);
+                    vaciacampos();
                 } else {
-                    metodos.anadejuego(nombrejuegoeditado, tnombre.getText(), ".\\downloaded_images" + "\\" + nombreimagen);
-                    System.out.println("Añadir juego no implementado.");
+                  //  metodos.anadejuego(nombrejuegoeditado, tnombre.getText(), ".\\downloaded_images" + "\\" + nombreimagen);
                 }
             } catch (IOException ex) {
                 Logger.getLogger(Frmanadeimagen.class.getName()).log(Level.SEVERE, null, ex);
@@ -220,7 +232,7 @@ public class Frmanadeimagen extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Debes llenar todos los campos", "Alerta " + "Alerta", JOptionPane.INFORMATION_MESSAGE);
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_banadirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -258,9 +270,9 @@ public class Frmanadeimagen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton banadir;
     private javax.swing.JButton bimagen;
     private javax.swing.JButton brom;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
